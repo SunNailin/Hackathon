@@ -1,7 +1,7 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import re
-from mysqlConnect import MysqlConnect 
+from .mysqlConnect import MysqlConnect 
 
 
 class MoneySuggestion:

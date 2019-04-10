@@ -1,13 +1,13 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import MySQLdb
+import pymysql
 
 class MysqlConnect:
 	instance = None;
 	
 	def __init__(self,name):
 		self.name = name;
-		self.db = MySQLdb.connect("localhost","root","root","Hackathon",charset='utf8');
+		self.db = pymysql.connect("localhost","root","12345","Hackathon",charset='utf8');
 		self.cursor = self.db.cursor();
 	
 	def __del__(self):

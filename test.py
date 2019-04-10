@@ -1,16 +1,8 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
-import MySQLdb
+from hack.MoneySuggestion import MoneySuggestion
 
-db = MySQLdb.connect("localhost","root","12345","gamehelper",charset='utf8')
-cursor = db.cursor()
-sql = """INSERT INTO Player(name,sex,profession,money,level,attack,defend,health,vip,weapon,armour,weaponlevel,armourlevel,skilllevel)
-	VALUES ('Lily',1,2,90000,5,150,120,300,1,2,10,3,4,4)"""
-try:
-	cursor.execute(sql)
-	db.commit()
-	print "done!"
-except:
-	db.rollback()
-	print "failed!"
-db.close()
+if __name__ == '__main__':
+	obj = MoneySuggestion();
+	str = obj.start_suggestion(u'我需要一个购物方案啊啊啊');
+	print(str);
