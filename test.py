@@ -8,7 +8,7 @@ if __name__ == '__main__':
 	ques = sys.argv[1]
 	if ques == None:
 		ques = u'你好，我是吴鸭子'
-	print(ques)
+	#print(ques)
 	str = obj.question_begin(ques)
 	print(str)
 	'''conn = MysqlConnect.get_instance('db')

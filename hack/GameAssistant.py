@@ -8,8 +8,28 @@ class GameAssistant:
 	def __init__(self):
 		self.name = ''
 		self.pkname = ''
+		self.get_config()
 		self.conn = MysqlConnect.get_instance('db')
 		self.moneySuggest = MoneySuggestion(self.conn)
+		
+	def set_config(self):
+		f = open('save.txt','w')
+		str = self.name+'\n'+self.pkname
+		#print(str)
+		f.write(str)
+		f.close()
+	
+	def get_config(self):
+		f = open('save.txt','r')
+		name = f.readline().replace('\n','')
+		pkname = f.readline().replace('\n','')
+		f.close()
+		name.strip()
+		pkname.strip()
+		self.name = name
+		self.pkname = pkname
+		print(self.name)
+		#print(self.pkname)
 		
 	def check_name_in_db(self,name):
 		db = self.conn.db
@@ -33,21 +53,26 @@ class GameAssistant:
 		str = '';
 		if len(name) > 0:
 			if name == self.name:
-				return u'欢迎回来%s,有什么问题可以帮助你呢.'%name
+				return u'欢迎回来,%s少侠,有什么问题可以帮助你呢.'%name
 			elif self.check_name_in_db(name) > 0:
 				self.name = name
-				return u'你好,%s,有什么问题可以帮助你呢.'%name
-		return u'对不起,查询不到%s的信息,请检查您的姓名'%name
+				self.set_config()
+				return u'%s少侠你好,有什么问题可以帮助你呢.'%name
+		return u'对不起,查询不到%s的信息,请少侠检查您的姓名'%name
 	
 	def	get_pk_name(self,str):
 		name0 = re.findall(r'对手是(.+)',str)
 		name = name0[0].strip()
 		name = '"'+name+'"'
 		str = '';
-		if len(name) > 0 and self.check_name_in_db(name) > 0:
-			self.pkname = name
-			return u'好的.你的对手是%s,我可以提供pk的相关建议哈.'%name
-		return u'对不起,查询不到%s的信息,请检查您对手的姓名'%name
+		if len(name) > 0:
+			if name == self.name:
+				return u'自己跟自己打？左右互搏啊！少侠好身手，我帮不了你了。'
+			elif self.check_name_in_db(name) > 0:
+				self.pkname = name
+				self.set_config()
+				return u'好的.少侠的对手是%s,我可以提供pk的相关建议哈.'%name
+		return u'对不起,查询不到%s的信息,请少侠检查对手的姓名'%name
 	
 	def do_answer(self,str):
 		ans = '';

@@ -96,9 +96,9 @@ class MoneySuggestion:
 		return str
 		
 	def start_suggestion(self,name,str):
-		if re.search(u'购物方案',str):
-			if len(name) <= 0:
-				name = "'吴鸭子'"
+		if re.search(u'消费方案',str):
+			#if len(name) <= 0:
+				#name = "'吴鸭子'"
 			data = self.get_PlayerProperties('t_player','name',name)
 			level = data[4]
 			money = data[8]
