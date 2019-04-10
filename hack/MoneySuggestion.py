@@ -1,52 +1,32 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import re
-from .mysqlConnect import MysqlConnect 
-
 
 class MoneySuggestion:
-	def __init__(self):
-		self.conn = MysqlConnect.get_instance('db')
+	def __init__(self,conn):
+		self.conn = conn
+	
+	def select_db_data(self,sql):
+		db = self.conn.db
+		cursor = self.conn.db.cursor()
+		try:
+			cursor.execute(sql)
+			data = cursor.fetchone()
+			return data
+		except:
+			print('Error: unable to fecth data!!!')
 	
 	def get_PlayerProperties(self,table,index,value):
-		db = self.conn.db
-		cursor = self.conn.db.cursor()
 		sql = "SELECT * FROM %s WHERE %s = %s" % (table,index,value)
-		try:
-			cursor.execute(sql)
-			data = cursor.fetchone()
-			#print(data)
-			return data
-		except:
-			pass
-			#print "Error: unable to fecth data!!!"
-
+		return self.select_db_data(sql)
 
 	def get_next_level_equip(self,eclass,etype,ereq,money):
-		db = self.conn.db
-		cursor = self.conn.db.cursor()
 		sql = "SELECT name, cost FROM t_equipment WHERE class = %d AND type = %d AND require_level = %d AND cost < %d ORDER BY cost DESC" % (eclass,etype,ereq,money)
-		try:
-			cursor.execute(sql)
-			data = cursor.fetchall()
-			#print(data)
-			return data
-		except:
-			pass
-			#print "Error: unable to fecth equip data!!!"
+		return self.select_db_data(sql)
 
 	def get_bag_item(self,itemid,playerid):
-		db = self.conn.db
-		cursor = self.conn.db.cursor()
 		sql = "SELECT name, number FROM t_bag WHERE itemid = %d AND belong = %d" % (itemid,playerid)
-		try:
-			cursor.execute(sql)
-			data = cursor.fetchone()
-			#print(data)
-			return data
-		except:
-			pass
-			#print "Error: unable to fecth equip data!!!"
+		return self.select_db_data(sql)
 		
 	def get_cost_factor(self,attack = 0,defend = 0,health = 0):
 		return 1.5*attack + 1.2*defend + 2*health
@@ -80,9 +60,9 @@ class MoneySuggestion:
 		if (req_level + 10 <= level) and (req_level <= 50):
 			#可以更换下一等级装备
 			equip = self.get_next_level_equip(eclass,etype,req_level+10,money)
-			if len(equip) > 0:
-				equipdata = equip[0]
-				str = u'建议购买高级装备%s替换现有装备%s，需要金币%d '%(equipdata[0],name,equipdata[1])
+			if equip:
+				#equipdata = equip[0]
+				str = u'建议购买高级装备%s替换现有装备%s，需要金币%d '%(equip[0],name,equip[1])
 				return str
 		if itemlevel < level:
 			if req_level < 30:
@@ -115,9 +95,11 @@ class MoneySuggestion:
 		#购买套装
 		return str
 		
-	def start_suggestion(self,str):
+	def start_suggestion(self,name,str):
 		if re.search(u'购物方案',str):
-			data = self.get_PlayerProperties('t_player','name',"'吴鸭子'")
+			if len(name) <= 0:
+				name = "'吴鸭子'"
+			data = self.get_PlayerProperties('t_player','name',name)
 			level = data[4]
 			money = data[8]
 			weapon = data[10]
@@ -135,9 +117,10 @@ class MoneySuggestion:
 		return ''
 	
 if __name__ == '__main__':
-	obj = MoneySuggestion()
-	str = obj.start_suggestion(u'我需要一个购物方案啊啊啊')
-	print(str)
+	print('11111')
+	#obj = MoneySuggestion()
+	#str = obj.start_suggestion(u'我需要一个购物方案啊啊啊')
+	#print(str)
 	
 	
 	

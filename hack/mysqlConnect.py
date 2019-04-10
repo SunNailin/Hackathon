@@ -7,8 +7,11 @@ class MysqlConnect:
 	
 	def __init__(self,name):
 		self.name = name
-		self.db = pymysql.connect("localhost","root","12345","Hackathon",charset='utf8')
-		self.cursor = self.db.cursor()
+		try:
+			self.db = pymysql.connect("localhost","root","12345","Hackathon",charset='utf8')
+			self.cursor = self.db.cursor()
+		except:
+			print('db connect failed!!!')
 	
 	def __del__(self):
 		if self.db != None:
