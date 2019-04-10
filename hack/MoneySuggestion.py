@@ -71,15 +71,38 @@ class MoneySuggestion:
 				itemid = 2
 			itemid = (eclass-1)*2+itemid
 			item = self.get_bag_item(itemid,playerid)
-			if item != None:
+			if item:
 				num = item[1]
 				need = (level-1+itemlevel)*(level-itemlevel)/2 - num
 				if need > 0:
 					str = u'建议购买%d个%s将现有装备%s提升至人物等级 '%(need,item[0],name)
 					return str
-		
-			
-	def money_spend_suggestion(self,playerid,level,money,weapon,armour,wlevel,alevel,slevel,vip):
+			else:
+				sql = "SELECT name FROM t_item WHERE id = %d" % (itemid)
+				item = self.select_db_data(sql)
+				need = (level-1+itemlevel)*(level-itemlevel)/2
+				str = u'建议购买%d个%s将现有装备%s提升至人物等级 '%(need,item[0],name)
+		return ''
+	
+	def get_drug_str(self,playerid):
+		item = self.get_bag_item(7,playerid)
+		if item == None:
+			return u'推荐购买回血药品%s%d '%('止血草',100)
+		elif item[4] < 100:
+			return u'推荐购买回血药品%s%d '%('止血草',100-item[4])
+	
+	def get_suit_str(self,playerid,sect):
+		sql = "SELECT * FROM t_item WHERE sect = %d" % (sect)
+		data = self.select_db_data(sql)
+		id = data[0]
+		name = data[1]
+		des = data[2]
+		cost = data[4]
+		item = self.get_bag_item(id,playerid)
+		if item == 	None:
+			return u'推荐购买%s %s,仅售%d,你值得拥有'%(des,name,cost)
+	
+	def money_spend_suggestion(self,playerid,level,money,weapon,armour,wlevel,alevel,slevel,vip,sect):
 		str = u'推荐方案如下: '
 		money_left = money
 		#技能升级
@@ -92,7 +115,10 @@ class MoneySuggestion:
 		if level > alevel:
 			str = str+self.get_equipment_str(playerid,level,money,alevel,'armour',armour,vip)
 		#药品购买
+		str = str+self.get_drug_str(playerid)
 		#购买套装
+		if vip > 0:
+			str = str + self.get_suit_str(playerid,sect)
 		return str
 		
 	def start_suggestion(self,name,str):
@@ -100,6 +126,7 @@ class MoneySuggestion:
 			#if len(name) <= 0:
 				#name = "'吴鸭子'"
 			data = self.get_PlayerProperties('t_player','name',name)
+			sect = data[3]
 			level = data[4]
 			money = data[8]
 			weapon = data[10]
@@ -111,7 +138,7 @@ class MoneySuggestion:
 			vip = data[9]
 			playerid = data[0]
 			
-			my_suggestion = self.money_spend_suggestion(playerid,level,money,weapon,armour,weaponlevel,armourlevel,skilllevel,vip)
+			my_suggestion = self.money_spend_suggestion(playerid,level,money,weapon,armour,weaponlevel,armourlevel,skilllevel,vip,sect)
 			#print(my_suggestion)
 			return my_suggestion
 		return ''

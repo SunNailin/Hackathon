@@ -28,7 +28,7 @@ class GameAssistant:
 		pkname.strip()
 		self.name = name
 		self.pkname = pkname
-		print(self.name)
+		#print(self.name)
 		#print(self.pkname)
 		
 	def check_name_in_db(self,name):

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2019-04-09 18:17:05
+Date: 2019-04-10 18:43:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -96,19 +96,26 @@ CREATE TABLE `t_item` (
   `说明` varchar(255) DEFAULT NULL COMMENT '攻击',
   `stage` int(10) DEFAULT NULL COMMENT '掉落场景 0则不在副本获取',
   `cost` int(30) DEFAULT '0' COMMENT '商店售价 0则不在商店出售',
+  `sect` int(10) unsigned DEFAULT '0' COMMENT '门派专属 没有为0',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of t_item
 -- ----------------------------
-INSERT INTO `t_item` VALUES ('1', '青铜矿', '30级以下武器升级道具', '1', '200');
-INSERT INTO `t_item` VALUES ('2', '玄铁矿', '60级以下武器升级道具', '2', '800');
-INSERT INTO `t_item` VALUES ('3', '粗棉布', '30级以下防具升级道具', '1', '180');
-INSERT INTO `t_item` VALUES ('4', '毛皮', '60级以下防具升级道具', '2', '820');
-INSERT INTO `t_item` VALUES ('5', '紫金矿', 'vip武器升级道具', '0', '1500');
-INSERT INTO `t_item` VALUES ('6', '天蚕丝', 'vip防具升级道具', '0', '1500');
-INSERT INTO `t_item` VALUES ('7', '止血草', '加血10%', '1', '300');
+INSERT INTO `t_item` VALUES ('1', '青铜矿', '30级以下武器升级道具', '1', '200', '0');
+INSERT INTO `t_item` VALUES ('2', '玄铁矿', '60级以下武器升级道具', '2', '800', '0');
+INSERT INTO `t_item` VALUES ('3', '粗棉布', '30级以下防具升级道具', '1', '180', '0');
+INSERT INTO `t_item` VALUES ('4', '毛皮', '60级以下防具升级道具', '2', '820', '0');
+INSERT INTO `t_item` VALUES ('5', '紫金矿', 'vip武器升级道具', '0', '1500', '0');
+INSERT INTO `t_item` VALUES ('6', '天蚕丝', 'vip防具升级道具', '0', '1500', '0');
+INSERT INTO `t_item` VALUES ('7', '止血草', '加血10%', '1', '300', '0');
+INSERT INTO `t_item` VALUES ('8', '逍遥御风', '逍遥派专属套装 骗土豪专用', '0', '18888', '1');
+INSERT INTO `t_item` VALUES ('9', '星星点灯', '星宿派专属套装 骗土豪专用', '0', '18888', '2');
+INSERT INTO `t_item` VALUES ('10', '天山套装', '天山派专属套装 骗土豪专用', '0', '18888', '3');
+INSERT INTO `t_item` VALUES ('11', '丐帮套装', '丐帮专属套装 骗土豪专用', '0', '18888', '4');
+INSERT INTO `t_item` VALUES ('12', '少林套装', '少林专属套装 骗土豪专用', '0', '18888', '5');
+INSERT INTO `t_item` VALUES ('13', '无裆套装', '无裆派专属套装 骗土豪专用', '0', '18888', '6');
 
 -- ----------------------------
 -- Table structure for t_pet
@@ -160,8 +167,8 @@ CREATE TABLE `t_player` (
 -- ----------------------------
 -- Records of t_player
 -- ----------------------------
-INSERT INTO `t_player` VALUES ('1', '吴鸭子', '1', '1', '18', '1100', '500', '500', '10000', '0', '2', '11', '3', '5', '10', '0', '0', '1');
-INSERT INTO `t_player` VALUES ('2', '梁朝伟', '1', '2', '25', '3200', '2400', '2800', '100000', '1', '2', '12', '1', '4', '23', '0', '0', '2');
+INSERT INTO `t_player` VALUES ('1', '吴鸭子', '1', '1', '18', '1100', '500', '500', '10000', '1', '2', '11', '3', '5', '10', '0', '0', '1');
+INSERT INTO `t_player` VALUES ('2', '梁朝伟', '1', '2', '25', '3200', '2400', '2800', '100000', '1', '1', '8', '4', '16', '23', '0', '0', '2');
 
 -- ----------------------------
 -- Table structure for t_sects
@@ -188,7 +195,7 @@ INSERT INTO `t_sects` VALUES ('2', '生锈派', '1', '3', '8', '6', '7', null, n
 INSERT INTO `t_sects` VALUES ('3', '舔山派', '2', '1', '7', '7', '7', null, null);
 INSERT INTO `t_sects` VALUES ('4', '钙帮', '2', '3', '10', '6', '5', null, null);
 INSERT INTO `t_sects` VALUES ('5', '烧林寺', '2', '2', '5', '8', '8', null, null);
-INSERT INTO `t_sects` VALUES ('6', '地龙寺', '1', '2', '9', '6', '6', null, null);
+INSERT INTO `t_sects` VALUES ('6', '无裆派', '1', '2', '9', '6', '6', null, null);
 
 -- ----------------------------
 -- Table structure for t_shop
