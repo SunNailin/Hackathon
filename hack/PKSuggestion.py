@@ -18,35 +18,80 @@ class PKSuggestion:
 	
 	def get_PlayerProperties(self,table,index,value):
 		sql = "SELECT * FROM %s WHERE %s = %s" % (table,index,value)
+		#print(sql)
 		return self.select_db_data(sql)
 		
 	def get_SectPropertyByIndex(self, property, id):
 		sql = "SELECT %s FROM t_sects WHERE id = %s" % (property, id)
-		print(sql)
+		#print(sql)
 		return self.select_db_data(sql)
+		
+	def get_EquipmentProperties(self, property, attribute, class_, type, level):
+		sql = "SELECT %s FROM t_equipment WHERE attribute = %s AND class = %s AND require_level <= %s AND type = %s LIMIT 1" % (property, attribute, class_, level, type)
+		#print(sql)
+		return self.select_db_data(sql);
 
 	def get_sectDescriptions(self, selfId, oppId):
 		selfData = self.get_PlayerProperties('t_player', 'id', selfId)
 		oppData = self.get_PlayerProperties('t_player', 'id', oppId)
 		selfSect = selfData[3]
 		oppSect = oppData[3]
-		print(selfSect)
-		print(oppSect)
+		#print(selfSect)
+		#print(oppSect)
 		selfDesc = self.get_SectPropertyByIndex('pk_self', selfSect)[0]
-		print(selfDesc)
+		#print(selfDesc)
 		oppDesc = self.get_SectPropertyByIndex('pk_opp', oppSect)[0]
-		print(selfDesc + oppDesc)
+		#print(selfDesc + oppDesc)
 		return selfDesc + oppDesc
+	
+	def get_StageProrerties(self, property, id):
+		sql = "SELECT %s FROM t_stage WHERE id = %s" % (property, id)
+		return self.select_db_data(sql)
+		
+	def get_EquipmentRecommend(self, selfData, oppData):
+		selfId = selfData[0]
+		oppId = oppData[0]
+		selfLevel = selfData[4]
+		oppLevel = oppData[4]
+		selfSect = selfData[3]
+		oppSect = oppData[3]
+		selfAttribute = self.get_SectPropertyByIndex('attribute', selfSect)[0]
+		oppAttribute = self.get_SectPropertyByIndex('attribute', oppSect)[0]
+		selfType = self.get_SectPropertyByIndex('type', selfSect)[0]
+		oppType = self.get_SectPropertyByIndex('type', oppSect)[0]
+		
+		if(selfLevel + 10 < oppLevel):
+			return "对方等级高你太多了，别鸡蛋碰石头了"
+		elif(oppLevel + 10 < selfLevel):
+			return "你等级高对方很多，基本可以虐他，就不给你建议了哈"
+		else:
+			weaponName = self.get_EquipmentProperties('name', selfAttribute, '1', selfType, selfLevel)[0]
+			weaponDesc = self.get_EquipmentProperties('description', selfAttribute, '1', selfType, selfLevel)[0]
+			weaponGetway = self.get_EquipmentProperties('get_way', selfAttribute, '1', selfType, selfLevel)[0]
+			weaponStageName = self.get_StageProrerties('name', weaponGetway)[0]
+			weaponStr = "当前最适合您的装备是%s%s,可以在%s获得，" % (weaponDesc, weaponName, weaponStageName)
+			
+			armorName = self.get_EquipmentProperties('name', oppType, '2', 0, selfLevel)[0]
+			armorDesc = self.get_EquipmentProperties('description', oppType, '2', 0, selfLevel)[0]
+			armorGetway = self.get_EquipmentProperties('get_way', oppType, '2', 0, selfLevel)[0]
+			#print(armorGetway)
+			armorStageName = self.get_StageProrerties('name', armorGetway)[0]
+			armorStr = "当前最适合此次PK的防具是%s%s,它能够很好地防御对方的属性攻击，可以在%s获得。" % (armorDesc, armorName, armorStageName)
+			#print(weaponStr)
+			return weaponStr + armorStr;
 		
 	def start_suggestion(self, str, selfName, oppName):
 		if re.search(u'PK',str):
+			#print(selfName)
 			selfData = self.get_PlayerProperties('t_player','name', selfName)			
 			selfId = selfData[0]
 			oppData = self.get_PlayerProperties('t_player','name', oppName)
 			oppId = oppData[0]
-			my_suggestion = self.get_sectDescriptions(selfId, oppId)
+			my_SectSuggestion = self.get_sectDescriptions(selfId, oppId)
+			my_equipmentRecommend = self.get_EquipmentRecommend(selfData, oppData)
+			#print(my_SectSuggestion + my_equipmentRecommend)
 			#print(my_suggestion)
-			return my_suggestion
+			return my_SectSuggestion + my_equipmentRecommend
 		return '';
 			
 if __name__ == '__main__':
