@@ -3,6 +3,7 @@
 import re
 from .mysqlConnect import MysqlConnect 
 from .MoneySuggestion import MoneySuggestion
+from .PKSuggestion import PKSuggestion
 
 class GameAssistant:
 	def __init__(self):
@@ -11,6 +12,7 @@ class GameAssistant:
 		self.get_config()
 		self.conn = MysqlConnect.get_instance('db')
 		self.moneySuggest = MoneySuggestion(self.conn)
+		self.pkSuggest = PKSuggestion(self.conn)
 		
 	def set_config(self):
 		f = open('save.txt','w')
@@ -77,6 +79,9 @@ class GameAssistant:
 	def do_answer(self,str):
 		ans = '';
 		ans = ans + self.moneySuggest.start_suggestion(self.name,str)
+		if len(ans) > 0:
+			return ans
+		ans = ans + self.pkSuggest.start_suggestion(str)
 		if len(ans) > 0:
 			return ans
 		return ans
