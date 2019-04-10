@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Vultr
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50643
- Source Host           : 144.202.8.92:3306
- Source Schema         : Hackathon
+ Source Server Version : 80015
+ Source Host           : localhost:3306
+ Source Schema         : hackathon
 
  Target Server Type    : MySQL
- Target Server Version : 50643
+ Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 10/04/2019 20:02:40
+ Date: 10/04/2019 22:49:10
 */
 
 SET NAMES utf8mb4;
@@ -76,6 +76,7 @@ CREATE TABLE `t_equipment`  (
   `pk_description_self` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'PK时对自己描述性的话',
   `pk_description_opp` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'PK时作为对手描述性的话',
   `cost` int(11) NULL DEFAULT 0 COMMENT '售价',
+  `get_way` tinyint(4) NULL DEFAULT NULL COMMENT '获取途径（对应副本ID）',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id`(`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
@@ -83,12 +84,24 @@ CREATE TABLE `t_equipment`  (
 -- ----------------------------
 -- Records of t_equipment
 -- ----------------------------
-INSERT INTO `t_equipment` VALUES (1, '小冰刀', 1, 1, 10, 100, 1, 10, 2, 0, '冰属性的内功小刀', 0, NULL, NULL, 500);
-INSERT INTO `t_equipment` VALUES (2, '大冰刀', 1, 1, 10, 100, 1, 10, 2, 10, '冰属性的外功大刀', 0, '', '', 4000);
-INSERT INTO `t_equipment` VALUES (3, '王八壳', 2, 1, 1, 1, 1, 1, 0, 0, '冰属性的初级防御装备', 0, NULL, NULL, 600);
-INSERT INTO `t_equipment` VALUES (4, '千年王八壳', 2, 1, 1, 1, 1, 1, 0, 10, '冰属性的高级防御装备', 0, NULL, NULL, 5000);
-INSERT INTO `t_equipment` VALUES (5, '烧火小破棍', 1, 2, 10, 100, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `t_equipment` VALUES (6, '烧火大长棍', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `t_equipment` VALUES (1, '小冰刀', 1, 1, 10, 100, 1, 10, 2, 0, '冰属性的初级外功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (2, '大冰刀', 1, 1, 10, 100, 1, 10, 2, 10, '冰属性的高级外功武器', 0, '', '', 4000, 2);
+INSERT INTO `t_equipment` VALUES (3, '烧火小破棍', 1, 2, 10, 100, 1, 1, 2, 0, '火属性的初级外功武器', 0, NULL, NULL, 0, 1);
+INSERT INTO `t_equipment` VALUES (4, '烧火大长棍', 1, 2, 1, 100, 1, 10, 2, 10, '火属性的高级外功武器', 0, NULL, NULL, 0, 2);
+INSERT INTO `t_equipment` VALUES (5, '小药袋子', 1, 3, 10, 100, 1, 1, 2, 0, '毒属性的初级外功武器', 0, NULL, NULL, 0, 1);
+INSERT INTO `t_equipment` VALUES (6, '大药袋子', 1, 3, 1, 100, 1, 10, 2, 10, '毒属性的高级外功武器', 0, NULL, NULL, 0, 2);
+INSERT INTO `t_equipment` VALUES (7, '小冰流碴子', 1, 1, NULL, NULL, NULL, NULL, 1, 0, '冰属性的初级内功武器', 0, NULL, NULL, 0, 1);
+INSERT INTO `t_equipment` VALUES (8, '大冰流碴子', 1, 1, NULL, NULL, NULL, NULL, 1, 10, '冰属性的高级内功武器', 0, NULL, NULL, 0, 2);
+INSERT INTO `t_equipment` VALUES (9, '酒精瓶', 1, 2, NULL, NULL, NULL, NULL, 1, 0, '火属性的初级内功武器', 0, NULL, NULL, 0, 1);
+INSERT INTO `t_equipment` VALUES (10, '汽油瓶', 1, 2, NULL, NULL, NULL, NULL, 1, 10, '火属性的高级内功武器', 0, NULL, NULL, 0, 2);
+INSERT INTO `t_equipment` VALUES (11, '小皮鞭', 1, 3, NULL, NULL, NULL, NULL, 1, 0, '毒属性的初级内功武器', 0, NULL, NULL, 0, 1);
+INSERT INTO `t_equipment` VALUES (12, '大皮鞭', 1, 3, NULL, NULL, NULL, NULL, 1, 10, '毒属性的高级内功武器', 0, NULL, NULL, 0, 2);
+INSERT INTO `t_equipment` VALUES (13, '王八壳', 2, 1, 1, 1, 1, 1, 0, 0, '冰属性的初级防御装备', 0, NULL, NULL, 600, 3);
+INSERT INTO `t_equipment` VALUES (14, '千年王八壳', 2, 1, 1, 1, 1, 1, 0, 10, '冰属性的高级防御装备', 0, NULL, NULL, 5000, 4);
+INSERT INTO `t_equipment` VALUES (15, '平底锅', 2, 2, NULL, NULL, NULL, NULL, 0, 0, '火属性的初级防御装备', 0, NULL, NULL, 0, 3);
+INSERT INTO `t_equipment` VALUES (16, '不锈钢平底锅', 2, 2, NULL, NULL, NULL, NULL, 0, 10, '火属性的高级防御装备', 0, NULL, NULL, 0, 4);
+INSERT INTO `t_equipment` VALUES (17, '防毒口罩', 2, 3, NULL, NULL, NULL, NULL, 0, 0, '毒属性的初级防御装备', 0, NULL, NULL, 0, 3);
+INSERT INTO `t_equipment` VALUES (18, '防毒面具', 2, 3, NULL, NULL, NULL, NULL, 0, 10, '毒属性的高级防御装备', 0, NULL, NULL, 0, 4);
 
 -- ----------------------------
 -- Table structure for t_item
@@ -167,10 +180,12 @@ CREATE TABLE `t_player`  (
 -- ----------------------------
 -- Records of t_player
 -- ----------------------------
-INSERT INTO `t_player` VALUES (1, '吴鸭子', 1, 1, 18, 1100, 500, 500, 10000, 1, 2, 11, 3, 5, 10, 0, 0, 1);
-INSERT INTO `t_player` VALUES (2, '梁朝伟', 1, 2, 25, 3200, 2400, 2800, 100000, 1, 1, 8, 4, 16, 23, 0, 0, 2);
-INSERT INTO `t_player` VALUES (3, '乔峰', 1, 4, 99, 9999, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
-INSERT INTO `t_player` VALUES (4, '舔山童姥', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
+INSERT INTO `t_player` VALUES (1, '吴鸭子', 1, 1, 9, 1100, 500, 500, 10000, 1, 2, 11, 3, 5, 10, 0, 0, 1);
+INSERT INTO `t_player` VALUES (2, '丁春秋', 1, 2, 11, 3200, 2400, 2800, 100000, 1, 1, 8, 4, 16, 23, 0, 0, 2);
+INSERT INTO `t_player` VALUES (3, '舔山童姥', 0, 3, 11, 9999, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
+INSERT INTO `t_player` VALUES (4, '乔峰', 1, 4, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
+INSERT INTO `t_player` VALUES (5, '玄慈', 1, 5, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
+INSERT INTO `t_player` VALUES (6, '本尘', 1, 6, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for t_sects
@@ -192,12 +207,12 @@ CREATE TABLE `t_sects`  (
 -- ----------------------------
 -- Records of t_sects
 -- ----------------------------
-INSERT INTO `t_sects` VALUES (1, '小腰派', 1, 1, 11, 5, 5, '我方是小腰派', '对方是小腰派');
-INSERT INTO `t_sects` VALUES (2, '生锈派', 1, 3, 8, 6, 7, '我方是生锈派', '对方是生锈派');
-INSERT INTO `t_sects` VALUES (3, '舔山派', 2, 1, 7, 7, 7, '我方是舔山派', '对方是舔山派');
-INSERT INTO `t_sects` VALUES (4, '钙帮', 2, 3, 10, 6, 5, '我方是钙帮', '对方是钙帮');
-INSERT INTO `t_sects` VALUES (5, '烧林寺', 2, 2, 5, 8, 8, '我方是烧林寺', '对方是烧林寺');
-INSERT INTO `t_sects` VALUES (6, '地龙寺', 1, 2, 9, 6, 6, '我方是地龙寺', '对方是地龙寺');
+INSERT INTO `t_sects` VALUES (1, '小腰派', 1, 1, 11, 5, 5, '我方是冰属性内功门派，以攻击见长，', '对方是小腰派，冰属性内功门派，攻击极高。');
+INSERT INTO `t_sects` VALUES (2, '生锈派', 1, 3, 5, 8, 8, '我方是毒属性内功门派，以防御见长，', '对方是生锈派，毒属性内功门派，攻击力一般，但防御和血量都很高。');
+INSERT INTO `t_sects` VALUES (3, '舔山派', 2, 1, 7, 7, 7, '我方是冰属性外功门派，各项均衡，', '对方是舔山派，冰属性外功门派，攻守均衡。');
+INSERT INTO `t_sects` VALUES (4, '钙帮', 2, 3, 10, 6, 5, '我方是毒属性外功门派，以攻击见长，', '对方是钙帮，毒属性外功门派，攻击力很高。');
+INSERT INTO `t_sects` VALUES (5, '烧林寺', 2, 2, 4, 8, 9, '我方是火属性外功门派，血厚防高，', '对方是烧林寺，火属性外功门派，血厚防高攻击力较低。');
+INSERT INTO `t_sects` VALUES (6, '地龙寺', 1, 2, 8, 7, 6, '我方是火属性内功门派，攻守较为均衡，', '对方是地龙寺，火属性内功门派，攻守均衡。');
 
 -- ----------------------------
 -- Table structure for t_shop
@@ -223,5 +238,13 @@ CREATE TABLE `t_stage`  (
   `recommend_force` int(11) NULL DEFAULT NULL COMMENT '推荐战力',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of t_stage
+-- ----------------------------
+INSERT INTO `t_stage` VALUES (1, '燕子坞', 0, NULL, 10);
+INSERT INTO `t_stage` VALUES (2, '缥缈峰', 10, NULL, 10);
+INSERT INTO `t_stage` VALUES (3, '四绝庄', 0, NULL, 10);
+INSERT INTO `t_stage` VALUES (4, '少室山', 10, NULL, 10);
 
 SET FOREIGN_KEY_CHECKS = 1;
