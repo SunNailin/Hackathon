@@ -22,6 +22,7 @@ class PKSuggestion:
 		
 	def get_SectPropertyByIndex(self, property, id):
 		sql = "SELECT %s FROM t_sects WHERE id = %s" % (property, id)
+		print(sql)
 		return self.select_db_data(sql)
 
 	def get_sectDescriptions(self, selfId, oppId):
@@ -29,26 +30,21 @@ class PKSuggestion:
 		oppData = self.get_PlayerProperties('t_player', 'id', oppId)
 		selfSect = selfData[3]
 		oppSect = oppData[3]
+		print(selfSect)
+		print(oppSect)
 		selfDesc = self.get_SectPropertyByIndex('pk_self', selfSect)[0]
+		print(selfDesc)
 		oppDesc = self.get_SectPropertyByIndex('pk_opp', oppSect)[0]
 		print(selfDesc + oppDesc)
 		return selfDesc + oppDesc
 		
-	def start_suggestion(self, str):
+	def start_suggestion(self, str, selfName, oppName):
 		if re.search(u'PK',str):
-			data = self.get_PlayerProperties('t_player','name',"'吴鸭子'")
-			level = data[4]
-			money = data[8]
-			weapon = data[10]
-			armour = data[12]
-			weaponlevel = data[11]
-			armourlevel = data[13]
-			skilllevel = data[14]
-			itemid = data[15]
-			vip = data[9]
-			playerid = data[0]
-		
-			my_suggestion = self.get_sectDescriptions(playerid, playerid)
+			selfData = self.get_PlayerProperties('t_player','name', selfName)			
+			selfId = selfData[0]
+			oppData = self.get_PlayerProperties('t_player','name', oppName)
+			oppId = oppData[0]
+			my_suggestion = self.get_sectDescriptions(selfId, oppId)
 			#print(my_suggestion)
 			return my_suggestion
 		return '';

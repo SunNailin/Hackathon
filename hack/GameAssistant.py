@@ -81,7 +81,7 @@ class GameAssistant:
 		ans = ans + self.moneySuggest.start_suggestion(self.name,str)
 		if len(ans) > 0:
 			return ans
-		ans = ans + self.pkSuggest.start_suggestion(str)
+		ans = ans + self.pkSuggest.start_suggestion(str, self.name, self.pkname)
 		if len(ans) > 0:
 			return ans
 		return ans
