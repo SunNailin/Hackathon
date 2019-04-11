@@ -1,22 +1,23 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import pymysql
-
+import sys
 class MysqlConnect:
 	instance = None
 	
 	def __init__(self,name):
 		self.name = name
 		try:
-			self.db = pymysql.connect("localhost","root","root","Hackathon",charset='utf8')
+			self.db = pymysql.connect("localhost","root","12345","Hackathon",charset='utf8')
 			self.cursor = self.db.cursor()
 		except:
 			print('db connect failed!!!')
+			sys.exit()
 	
 	def __del__(self):
-		if self.db != None:
+		if hasattr(self,'db') and self.db is not None:
 			self.db.close()
-			self.cursor = None
+			self.cursor.close()
 	
 	@classmethod
 	def get_instance(cls,name):

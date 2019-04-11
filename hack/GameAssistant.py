@@ -1,9 +1,12 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import re
+import os
+import sys
 from .mysqlConnect import MysqlConnect 
 from .MoneySuggestion import MoneySuggestion
 from .PKSuggestion import PKSuggestion
+from .CultivateSuggestion import CultivateSuggestion
 
 class GameAssistant:
 	def __init__(self):
@@ -13,6 +16,7 @@ class GameAssistant:
 		self.conn = MysqlConnect.get_instance('db')
 		self.moneySuggest = MoneySuggestion(self.conn)
 		self.pkSuggest = PKSuggestion(self.conn)
+		self.culSuggest = CultivateSuggestion(self.conn)
 		
 	def set_config(self):
 		f = open('save.txt','w')
@@ -22,16 +26,17 @@ class GameAssistant:
 		f.close()
 	
 	def get_config(self):
-		f = open('save.txt','r')
-		name = f.readline().replace('\n','')
-		pkname = f.readline().replace('\n','')
-		f.close()
-		name.strip()
-		pkname.strip()
-		self.name = name
-		self.pkname = pkname
-		#print(self.name)
-		#print(self.pkname)
+		if os.path.exists('save.txt'):
+			f = open('save.txt','r')
+			name = f.readline().replace('\n','')
+			pkname = f.readline().replace('\n','')
+			f.close()
+			name.strip()
+			pkname.strip()
+			self.name = name
+			self.pkname = pkname
+			#print(self.name)
+			#print(self.pkname)
 		
 	def check_name_in_db(self,name):
 		db = self.conn.db
@@ -45,10 +50,13 @@ class GameAssistant:
 				return 1
 		except:
 			print('Error: unable to fecth data!!!')
+			sys.exit()
 		return 0;
 	
 	def get_name(self,str):
 		name0 = re.findall(r'我是(.+)',str)
+		if len(name0) <= 0:
+			name0 = re.findall(r'我叫(.+)',str)
 		name = name0[0].strip()
 		name = '"'+name+'"'
 		#print(name)
@@ -64,6 +72,8 @@ class GameAssistant:
 	
 	def	get_pk_name(self,str):
 		name0 = re.findall(r'对手是(.+)',str)
+		if len(name0) <= 0:
+			name0 = re.findall(r'对手叫(.+)',str)
 		name = name0[0].strip()
 		name = '"'+name+'"'
 		str = '';
@@ -84,14 +94,17 @@ class GameAssistant:
 		ans = ans + self.pkSuggest.start_suggestion(str, self.name, self.pkname)
 		if len(ans) > 0:
 			return ans
+		ans = ans + self.culSuggest.start_suggestion(self.name,str)
+		if len(ans) > 0:
+			return ans
 		return ans
 		
 	
 	def question_begin(self,str):
 		ans = ''
-		if re.search(u'我是',str):
+		if re.search(u'我是',str) or re.search(u'我叫',str):
 			return self.get_name(str)
-		elif re.search(u'对手是',str):
+		elif re.search(u'对手是',str) or re.search(u'对手叫',str):
 			return self.get_pk_name(str)
 		else:
 			return self.do_answer(str)
