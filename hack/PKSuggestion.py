@@ -57,6 +57,7 @@ class PKSuggestion:
 		oppSect = oppData[3]
 		selfAttribute = self.get_SectPropertyByIndex('attribute', selfSect)[0]
 		oppAttribute = self.get_SectPropertyByIndex('attribute', oppSect)[0]
+		#print(oppAttribute)
 		selfType = self.get_SectPropertyByIndex('type', selfSect)[0]
 		oppType = self.get_SectPropertyByIndex('type', oppSect)[0]
 		
@@ -69,14 +70,22 @@ class PKSuggestion:
 			weaponDesc = self.get_EquipmentProperties('description', selfAttribute, '1', selfType, selfLevel)[0]
 			weaponGetway = self.get_EquipmentProperties('get_way', selfAttribute, '1', selfType, selfLevel)[0]
 			weaponStageName = self.get_StageProrerties('name', weaponGetway)[0]
-			weaponStr = "当前最适合您的装备是%s%s,可以在%s获得，" % (weaponDesc, weaponName, weaponStageName)
+			weaponStr = "当前最适合您的装备是%s,可以在%s获得，" % (weaponName, weaponStageName)
 			
-			armorName = self.get_EquipmentProperties('name', oppType, '2', 0, selfLevel)[0]
-			armorDesc = self.get_EquipmentProperties('description', oppType, '2', 0, selfLevel)[0]
-			armorGetway = self.get_EquipmentProperties('get_way', oppType, '2', 0, selfLevel)[0]
+			armorName = self.get_EquipmentProperties('name', oppAttribute, '2', 0, selfLevel)[0]
+			armorDesc = self.get_EquipmentProperties('description', oppAttribute, '2', 0, selfLevel)[0]
+			armorGetway = self.get_EquipmentProperties('get_way', oppAttribute, '2', 0, selfLevel)[0]
 			#print(armorGetway)
 			armorStageName = self.get_StageProrerties('name', armorGetway)[0]
-			armorStr = "当前最适合此次PK的防具是%s%s,它能够很好地防御对方的属性攻击，可以在%s获得。" % (armorDesc, armorName, armorStageName)
+			oppAttributeDesc = "无"
+			#print(oppAttribute)
+			if(oppAttribute == 1):
+			  oppAttributeDesc = "冰"
+			elif(oppAttribute == 2):
+			  oppAttributeDesc = "火"
+			elif(oppAttribute == 3):
+			  oppAttributeDesc = "毒"  
+			armorStr = "你最好装备%s,可防对方%s属性攻击，在%s副本掉落。" % (armorName, oppAttributeDesc, armorStageName)
 			#print(weaponStr)
 			return weaponStr + armorStr;
 		
