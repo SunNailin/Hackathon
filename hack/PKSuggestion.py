@@ -27,7 +27,7 @@ class PKSuggestion:
 		return self.select_db_data(sql)
 		
 	def get_EquipmentProperties(self, property, attribute, class_, type, level):
-		sql = "SELECT %s FROM t_equipment WHERE attribute = %s AND class = %s AND require_level <= %s AND type = %s LIMIT 1" % (property, attribute, class_, level, type)
+		sql = "SELECT %s FROM t_equipment WHERE attribute = %s AND class = %s AND require_level <= %s AND type = %s ORDER BY require_level DESC LIMIT 1" % (property, attribute, class_, level, type)
 		#print(sql)
 		return self.select_db_data(sql);
 
@@ -85,7 +85,7 @@ class PKSuggestion:
 			  oppAttributeDesc = "火"
 			elif(oppAttribute == 3):
 			  oppAttributeDesc = "毒"  
-			armorStr = "你最好装备%s,可防对方%s属性攻击，在%s副本掉落。" % (armorName, oppAttributeDesc, armorStageName)
+			armorStr = "你最好装备上%s,可防对方%s属性攻击，在%s副本掉落。" % (armorName, oppAttributeDesc, armorStageName)
 			#print(weaponStr)
 			return weaponStr + armorStr;
 		
