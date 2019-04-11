@@ -1,6 +1,7 @@
 ﻿#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 import sys
+import time
 from hack.GameAssistant import GameAssistant
 from hack.mysqlConnect import MysqlConnect 
 if __name__ == '__main__':
