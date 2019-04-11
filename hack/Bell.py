@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-
 import re
 import sys
-
+import time
 class Activity:
 	def __init__(self,conn):
 		self.conn = conn
@@ -20,7 +20,17 @@ class Activity:
 				self.act[index] = info
 				index += 1
 			f.close()'''
-	
+	def select_db_data(self,sql):
+		db = self.conn.db
+		cursor = self.conn.db.cursor()
+		try:
+			cursor.execute(sql)
+			data = cursor.fetchone()
+			return data
+		except:
+			print('Error: unable to fecth data!!!')
+			sys.exit()
+			
 	def select_db_data_all(self,sql):
 		db = self.conn.db
 		cursor = self.conn.db.cursor()
@@ -46,12 +56,54 @@ class Activity:
 			index += 1
 		str += u'需要预约活动吗？预约后活动开始前我会提醒呀.'
 		return str	
+	
+	def get_actinfo_str(self,str):
+		ans = ''
+		idstr = re.findall(u'活动(.*?)的',str)
+		if len(idstr) > 0:
+			id = int(idstr[0])
+			sql = "SELECT * FROM t_activities WHERE id = %d"%(id)
+			data = self.select_db_data(sql)
+			time = data[2].split(':')
+			hour = time[0]
+			min = time[1].replace('00','0')
+			ans += u'活动%d,%s,距离活动开始还有%s小时%s分.'%(id,data[1],hour,min)
+		return ans
+			
+	def subscribe_act_str(self,str):
+		ans = ''
+		idstr = re.findall(u'预约活动(.)',str)
+		if len(idstr) > 0:
+			id = int(idstr[0])
+			sql = "SELECT * FROM t_activities WHERE id = %d"%(id)
+			data = self.select_db_data(sql)
+			atime = data[2].split(':')
+			hour = atime[0]
+			min = atime[1].replace('00','0')
+			localtime = time.localtime(time.time())
+			hour_now = localtime.tm_hour
+			min_now = localtime.tm_min
+			dis = (int(hour)-hour_now)*60+int(min)-min_now
+			print(dis)
+			hourdis = int(dis/60)
+			mindis = dis-hourdis*60
+			if hourdis <= 0:
+				ans += u'已帮您预约活动%d,%s,距离活动开始还有%s分钟.'%(id,data[1],min)
+			else:
+				ans += u'已帮您预约活动%d,%s,距离活动开始还有%s小时%s分钟.'%(id,data[1],hourdis,mindis)
+			#todo:把info传出去
+			info = u'少侠，活动%s马上就要开始了，赶快去参加吧！'%data[1]
+		return ans
+	
 	def start_suggestion(self,str):
 		ans = ''
 		if (re.search(u'全部',str) or re.search(u'所有',str)) and re.search(u'活动',str) and re.search(u'时间',str):
 			sql = "SELECT * FROM t_activities"
+			print(sql)
 			data = self.select_db_data_all(sql)
 			ans = self.set_act(data)
 		elif re.search(u'活动',str) and re.search(u'时间',str):
-			pass
+			ans = self.get_actinfo_str(str)
+		elif re.search(u'预约活动',str):
+			ans = self.subscribe_act_str(str)
 		return ans	
