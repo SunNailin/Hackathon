@@ -7,6 +7,7 @@ from .mysqlConnect import MysqlConnect
 from .MoneySuggestion import MoneySuggestion
 from .PKSuggestion import PKSuggestion
 from .CultivateSuggestion import CultivateSuggestion
+from .Bell import Activity
 
 class GameAssistant:
 	def __init__(self):
@@ -17,6 +18,7 @@ class GameAssistant:
 		self.moneySuggest = MoneySuggestion(self.conn)
 		self.pkSuggest = PKSuggestion(self.conn)
 		self.culSuggest = CultivateSuggestion(self.conn)
+		self.activity = Activity(self.conn)
 		
 	def set_config(self):
 		f = open('save.txt','w')
@@ -95,6 +97,9 @@ class GameAssistant:
 		if len(ans) > 0:
 			return ans
 		ans = ans + self.culSuggest.start_suggestion(self.name,str)
+		if len(ans) > 0:
+			return ans
+		ans = ans + self.activity.start_suggestion(str)
 		if len(ans) > 0:
 			return ans
 		return ans
