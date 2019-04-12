@@ -9,6 +9,7 @@ from .PKSuggestion import PKSuggestion
 from .CultivateSuggestion import CultivateSuggestion
 from .Bell import Activity
 from .QuestSuggestion import QuestSuggestion
+from .GuideSuggestion import GuideSuggestion
 
 class GameAssistant:
 	def __init__(self):
@@ -21,6 +22,7 @@ class GameAssistant:
 		self.culSuggest = CultivateSuggestion(self.conn)
 		self.activity = Activity(self.conn)
 		self.quest = QuestSuggestion(self.conn)
+		self.guide = GuideSuggestion(self.conn)
 		
 	def set_config(self):
 		f = open('save.txt','w')
@@ -105,6 +107,9 @@ class GameAssistant:
 		if len(ans) > 0:
 			return ans
 		ans = ans + self.quest.start_suggestion(self.name, str)
+		if len(ans) > 0:
+			return ans
+		ans = ans + self.guide.start_suggestion(self.name, str)
 		if len(ans) > 0:
 			return ans
 		return ans

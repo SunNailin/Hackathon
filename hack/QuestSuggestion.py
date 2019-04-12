@@ -37,7 +37,7 @@ class QuestSuggestion:
         stageData = self.select_db_data(sql)
         if stageData is not None:
             stageName = stageData[1]
-            questStr = "当前最适合您的副本是%s，大侠快去闯荡一番吧" % stageName
+            questStr = "当前最适合您的副本是%s，大侠快去闯荡一番吧。" % stageName
             return questStr
         else:
             return "少侠还需多历练才是";
