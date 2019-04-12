@@ -109,7 +109,7 @@ class CultivateSuggestion:
 		return ans
 		
 	def start_suggestion(self,name,str):
-		if re.search(u'养成',str) and (re.search(u'方案',str) or re.search(u'建议',str)):
+		if (re.search(u'养成',str) or re.search(u'成长',str) ) and ((re.search(u'方案',str) or re.search(u'建议',str))):
 			if len(name) <= 0:
 				return u'少侠哪位啊'
 			sql = "SELECT * FROM t_player WHERE name = %s" % name

@@ -66,6 +66,8 @@ class Activity:
 				if idstr[0] == self.trans_word[index]:
 					idstr = index+1
 					break;
+			if isinstance(idstr,list):
+				idstr = int(idstr[0])
 			id = idstr
 			sql = "SELECT * FROM t_activities WHERE id = %d"%(id)
 			print(sql)
@@ -73,7 +75,7 @@ class Activity:
 			time = data[2].split(':')
 			hour = time[0]
 			min = time[1].replace('00','0')
-			ans += u'活动%d,%s,距离活动开始还有%s小时%s分.'%(id,data[1],hour,min)
+			ans += u'活动%d,%s,开始时间：%s点%s分.'%(id,data[1],hour,min)
 		return ans
 			
 	def subscribe_act_str(self,str):
@@ -84,6 +86,8 @@ class Activity:
 				if idstr[0] == self.trans_word[index]:
 					idstr= index+1
 					break;
+			if isinstance(idstr,list):
+				idstr = int(idstr[0])
 			id = idstr
 			sql = "SELECT * FROM t_activities WHERE id = %d"%(id)
 			data = self.select_db_data(sql)
@@ -98,10 +102,13 @@ class Activity:
 			#print(dis)
 			hourdis = int(dis/60)
 			mindis = dis-hourdis*60
-			if hourdis <= 0:
-				ans += u'已帮您预约活动%d,%s,距离活动开始还有%s分钟.'%(id,data[1],min)
-			else:
+			if hourdis > 0:
 				ans += u'已帮您预约活动%d,%s,距离活动开始还有%s小时%s分钟.'%(id,data[1],hourdis,mindis)
+			elif mindis > 0:
+				ans += u'已帮您预约活动%d,%s,距离活动开始还有%s分钟.'%(id,data[1],mindis)
+			else:
+				ans += u'您已经错过活动啦！'
+				return (1,ans)
 			#todo:把info传出去
 			info = u'少侠，活动%s马上就要开始了，赶快去参加吧！'%data[1]
 			seconds = (int(hour)-hour_now)*3600+(int(min)-min_now)*60-sec_now

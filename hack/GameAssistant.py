@@ -109,7 +109,7 @@ class GameAssistant:
 		ans = self.guide.start_suggestion(self.name, str)
 		if len(ans) > 0:
 			return (1,ans)
-		ans = ans + self.activity.start_suggestion(str)
+		ans = self.activity.start_suggestion(str)
 		if len(ans[1]) > 0:
 			return ans
 		return ans
