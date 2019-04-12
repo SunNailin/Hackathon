@@ -4,6 +4,7 @@ import re
 import sys
 import time
 class Activity:
+	trans_word = [u'一',u'二',u'三',u'四',u'五',u'六',u'七',u'八',u'九',u'十']
 	def __init__(self,conn):
 		self.conn = conn
 		#self.act = []
@@ -61,8 +62,13 @@ class Activity:
 		ans = ''
 		idstr = re.findall(u'活动(.*?)的',str)
 		if len(idstr) > 0:
-			id = int(idstr[0])
+			for index in range(len(self.trans_word)):
+				if idstr[0] == self.trans_word[index]:
+					idstr = index+1
+					break;
+			id = idstr
 			sql = "SELECT * FROM t_activities WHERE id = %d"%(id)
+			print(sql)
 			data = self.select_db_data(sql)
 			time = data[2].split(':')
 			hour = time[0]
@@ -74,7 +80,11 @@ class Activity:
 		ans = ''
 		idstr = re.findall(u'预约活动(.)',str)
 		if len(idstr) > 0:
-			id = int(idstr[0])
+			for index in range(len(self.trans_word)):
+				if idstr[0] == self.trans_word[index]:
+					idstr= index+1
+					break;
+			id = idstr
 			sql = "SELECT * FROM t_activities WHERE id = %d"%(id)
 			data = self.select_db_data(sql)
 			atime = data[2].split(':')
@@ -83,6 +93,7 @@ class Activity:
 			localtime = time.localtime(time.time())
 			hour_now = localtime.tm_hour
 			min_now = localtime.tm_min
+			sec_now = localtime.tm_sec
 			dis = (int(hour)-hour_now)*60+int(min)-min_now
 			#print(dis)
 			hourdis = int(dis/60)
@@ -93,17 +104,21 @@ class Activity:
 				ans += u'已帮您预约活动%d,%s,距离活动开始还有%s小时%s分钟.'%(id,data[1],hourdis,mindis)
 			#todo:把info传出去
 			info = u'少侠，活动%s马上就要开始了，赶快去参加吧！'%data[1]
-		return ans
+			seconds = (int(hour)-hour_now)*3600+(int(min)-min_now)*60-sec_now
+			return (3,ans,seconds,info)
+		return (0,'')
 	
 	def start_suggestion(self,str):
-		ans = ''
-		if (re.search(u'全部',str) or re.search(u'所有',str)) and re.search(u'活动',str) and re.search(u'时间',str):
+		ans = (0,'')
+		if (re.search(u'全部',str) or re.search(u'所有',str)) and re.search(u'活动',str):
 			sql = "SELECT * FROM t_activities"
 			print(sql)
 			data = self.select_db_data_all(sql)
 			ans = self.set_act(data)
+			ans = (1,ans)
 		elif re.search(u'活动',str) and re.search(u'时间',str):
 			ans = self.get_actinfo_str(str)
+			ans = (1,ans)
 		elif re.search(u'预约活动',str):
 			ans = self.subscribe_act_str(str)
 		return ans	

@@ -69,12 +69,12 @@ class GameAssistant:
 		str = '';
 		if len(name) > 0:
 			if name == self.name:
-				return u'欢迎回来,%s少侠,有什么问题可以帮助你呢.'%name
+				return (1,u'欢迎回来,%s少侠,有什么问题可以帮助你呢.'%name)
 			elif self.check_name_in_db(name) > 0:
 				self.name = name
 				self.set_config()
-				return u'%s少侠你好,有什么问题可以帮助你呢.'%name
-		return u'对不起,查询不到%s的信息,请少侠检查您的姓名'%name
+				return (1,u'%s少侠你好,有什么问题可以帮助你呢.'%name)
+		return (1,u'对不起,查询不到%s的信息,请少侠检查您的姓名'%name)
 	
 	def	get_pk_name(self,str):
 		name0 = re.findall(r'对手是(.+)',str)
@@ -85,32 +85,32 @@ class GameAssistant:
 		str = '';
 		if len(name) > 0:
 			if name == self.name:
-				return u'自己跟自己打？左右互搏啊！少侠好身手，我帮不了你了。'
+				return (1,u'自己跟自己打？左右互搏啊！少侠好身手，我帮不了你了。')
 			elif self.check_name_in_db(name) > 0:
 				self.pkname = name
 				self.set_config()
-				return u'好的.少侠的对手是%s,我可以提供pk的相关建议哈.'%name
-		return u'对不起,查询不到%s的信息,请少侠检查对手的姓名'%name
+				return (1,u'好的.少侠的对手是%s,我可以提供pk的相关建议哈.'%name)
+		return (1,u'对不起,查询不到%s的信息,请少侠检查对手的姓名'%name)
 	
 	def do_answer(self,str):
-		ans = '';
-		ans = ans + self.moneySuggest.start_suggestion(self.name,str)
+		ans = (0,'');
+		ans = self.moneySuggest.start_suggestion(self.name,str)
 		if len(ans) > 0:
-			return ans
-		ans = ans + self.pkSuggest.start_suggestion(str, self.name, self.pkname)
+			return (1,ans)
+		ans = self.pkSuggest.start_suggestion(str, self.name, self.pkname)
 		if len(ans) > 0:
-			return ans
-		ans = ans + self.culSuggest.start_suggestion(self.name,str)
+			return (1,ans)
+		ans = self.culSuggest.start_suggestion(self.name,str)
 		if len(ans) > 0:
-			return ans
+			return (1,ans)
+		ans = self.quest.start_suggestion(self.name, str)
+		if len(ans) > 0:
+			return (1,ans)
+		ans = self.guide.start_suggestion(self.name, str)
+		if len(ans) > 0:
+			return (1,ans)
 		ans = ans + self.activity.start_suggestion(str)
-		if len(ans) > 0:
-			return ans
-		ans = ans + self.quest.start_suggestion(self.name, str)
-		if len(ans) > 0:
-			return ans
-		ans = ans + self.guide.start_suggestion(self.name, str)
-		if len(ans) > 0:
+		if len(ans[1]) > 0:
 			return ans
 		return ans
 		
