@@ -4,4 +4,4 @@ LIMIT 0, 1000
 
 -- Date: 2019-04-12 11:46
 */
-INSERT INTO `` (`id`,`itemid`,`name`,`type`,`number`,`belong`) VALUES (3,10,'改名卡',1,1,1);
+INSERT INTO `t_bag` (`id`,`itemid`,`name`,`type`,`number`,`belong`) VALUES (3,10,'改名卡',1,1,1);
