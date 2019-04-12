@@ -84,7 +84,7 @@ class Activity:
 			hour_now = localtime.tm_hour
 			min_now = localtime.tm_min
 			dis = (int(hour)-hour_now)*60+int(min)-min_now
-			print(dis)
+			#print(dis)
 			hourdis = int(dis/60)
 			mindis = dis-hourdis*60
 			if hourdis <= 0:

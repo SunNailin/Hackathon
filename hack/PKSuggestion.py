@@ -90,7 +90,7 @@ class PKSuggestion:
 			return weaponStr + armorStr;
 		
 	def start_suggestion(self, str, selfName, oppName):
-		if re.search(u'PK',str):
+		if re.search(u'PK',str) or re.search(u'pk',str):
 			#print(selfName)
 			selfData = self.get_PlayerProperties('t_player','name', selfName)			
 			selfId = selfData[0]
