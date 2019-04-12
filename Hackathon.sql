@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 11/04/2019 21:16:18
+ Date: 12/04/2019 14:50:40
 */
 
 SET NAMES utf8mb4;
@@ -104,33 +104,60 @@ CREATE TABLE `t_equipment`  (
 -- ----------------------------
 -- Records of t_equipment
 -- ----------------------------
-INSERT INTO `t_equipment` VALUES (1, '小冰刀', 1, 1, 10, 100, 1, 10, 2, 0, '冰属性的新手外功武器', 0, NULL, NULL, 500, 1);
-INSERT INTO `t_equipment` VALUES (2, '大冰刀', 1, 1, 10, 100, 1, 10, 2, 10, '冰属性的10级外功武器', 0, '', '', 4000, 2);
-INSERT INTO `t_equipment` VALUES (3, '烧火小破棍', 1, 2, 10, 100, 1, 1, 2, 0, '火属性的新手外功武器', 0, NULL, NULL, 500, 1);
-INSERT INTO `t_equipment` VALUES (4, '烧火大长棍', 1, 2, 1, 100, 1, 10, 2, 10, '火属性的10级外功武器', 0, NULL, NULL, 4000, 2);
-INSERT INTO `t_equipment` VALUES (5, '小药袋子', 1, 3, 10, 100, 1, 1, 2, 0, '毒属性的新手外功武器', 0, NULL, NULL, 500, 1);
-INSERT INTO `t_equipment` VALUES (6, '大药袋子', 1, 3, 1, 100, 1, 10, 2, 10, '毒属性的10级外功武器', 0, NULL, NULL, 4000, 2);
-INSERT INTO `t_equipment` VALUES (7, '小冰流碴子', 1, 1, NULL, NULL, NULL, NULL, 1, 0, '冰属性的新手内功武器', 0, NULL, NULL, 500, 1);
-INSERT INTO `t_equipment` VALUES (8, '大冰流碴子', 1, 1, NULL, NULL, NULL, NULL, 1, 10, '冰属性的10级内功武器', 0, NULL, NULL, 4000, 2);
-INSERT INTO `t_equipment` VALUES (9, '酒精瓶', 1, 2, NULL, NULL, NULL, NULL, 1, 0, '火属性的新手内功武器', 0, NULL, NULL, 500, 1);
-INSERT INTO `t_equipment` VALUES (10, '汽油瓶', 1, 2, NULL, NULL, NULL, NULL, 1, 10, '火属性的10级内功武器', 0, NULL, NULL, 4000, 2);
-INSERT INTO `t_equipment` VALUES (11, '小皮鞭', 1, 3, NULL, NULL, NULL, NULL, 1, 0, '毒属性的新手内功武器', 0, NULL, NULL, 500, 1);
-INSERT INTO `t_equipment` VALUES (12, '大皮鞭', 1, 3, NULL, NULL, NULL, NULL, 1, 10, '毒属性的10级内功武器', 0, NULL, NULL, 4000, 2);
-INSERT INTO `t_equipment` VALUES (13, '王八壳', 2, 1, 1, 1, 1, 1, 0, 0, '冰属性的新手防御装备', 0, NULL, NULL, 600, 3);
-INSERT INTO `t_equipment` VALUES (14, '千年王八壳', 2, 1, 1, 1, 1, 1, 0, 10, '冰属性的10级防御装备', 0, NULL, NULL, 5000, 4);
-INSERT INTO `t_equipment` VALUES (15, '平底锅', 2, 2, NULL, NULL, NULL, NULL, 0, 0, '火属性的新手防御装备', 0, NULL, NULL, 600, 3);
-INSERT INTO `t_equipment` VALUES (16, '不锈钢平底锅', 2, 2, NULL, NULL, NULL, NULL, 0, 10, '火属性的10级防御装备', 0, NULL, NULL, 5000, 4);
-INSERT INTO `t_equipment` VALUES (17, '防毒口罩', 2, 3, NULL, NULL, NULL, NULL, 0, 0, '毒属性的新手防御装备', 0, NULL, NULL, 600, 3);
-INSERT INTO `t_equipment` VALUES (18, '防毒面具', 2, 3, NULL, NULL, NULL, NULL, 0, 10, '毒属性的10级防御装备', 0, NULL, NULL, 5000, 4);
-INSERT INTO `t_equipment` VALUES (19, '闪亮的冰刀', 1, 1, 10, 100, 1, 10, 2, 20, '冰属性的20级外功武器', 0, NULL, NULL, 8000, 5);
-INSERT INTO `t_equipment` VALUES (20, '漆黑的烧火棍', 1, 2, NULL, NULL, NULL, NULL, 2, 20, '火属性的20级外功武器', 0, NULL, NULL, 8000, 5);
-INSERT INTO `t_equipment` VALUES (21, '结实的药袋子', 1, 3, NULL, NULL, NULL, NULL, 2, 20, '毒属性的20级外功武器', 0, NULL, NULL, 8000, 5);
-INSERT INTO `t_equipment` VALUES (22, '锃亮的冰流碴子', 1, 1, NULL, NULL, NULL, NULL, 1, 20, '冰属性的20级内功武器', 0, NULL, NULL, 8000, 5);
-INSERT INTO `t_equipment` VALUES (23, '丰满的汽油瓶', 1, 2, NULL, NULL, NULL, NULL, 1, 20, '火属性的20级内功武器', 0, NULL, NULL, 8000, 5);
-INSERT INTO `t_equipment` VALUES (24, '鳄鱼皮鞭', 1, 3, NULL, NULL, NULL, NULL, 1, 20, '毒属性的20级内功武器', 0, NULL, NULL, 8000, 5);
-INSERT INTO `t_equipment` VALUES (25, '碧绿的王八壳', 2, 1, NULL, NULL, NULL, NULL, 0, 20, '冰属性的20级防御装备', 0, NULL, NULL, 10000, 6);
-INSERT INTO `t_equipment` VALUES (26, '铝合金平底锅', 2, 2, NULL, NULL, NULL, NULL, 0, 20, '火属性的20级防御装备', 0, NULL, NULL, 10000, 6);
-INSERT INTO `t_equipment` VALUES (27, '活性炭防毒面具', 2, 3, NULL, NULL, NULL, NULL, 0, 20, '毒属性的20级防御装备', 0, NULL, NULL, 10000, 6);
+INSERT INTO `t_equipment` VALUES (1, '小冰刀', 1, 1, 10, 100, 1, 5, 2, 0, '冰属性的新手外功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (2, '大冰刀', 1, 1, 20, 200, 1, 5, 2, 10, '冰属性的10级外功武器', 0, NULL, NULL, 4000, 2);
+INSERT INTO `t_equipment` VALUES (3, '烧火小破棍', 1, 2, 10, 100, 1, 5, 2, 0, '火属性的新手外功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (4, '烧火大长棍', 1, 2, 20, 200, 1, 5, 2, 10, '火属性的10级外功武器', 0, NULL, NULL, 4000, 2);
+INSERT INTO `t_equipment` VALUES (5, '小药袋子', 1, 3, 10, 100, 1, 5, 2, 0, '毒属性的新手外功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (6, '大药袋子', 1, 3, 20, 200, 1, 5, 2, 10, '毒属性的10级外功武器', 0, NULL, NULL, 4000, 2);
+INSERT INTO `t_equipment` VALUES (7, '小冰流碴子', 1, 1, 10, 100, 1, 5, 1, 0, '冰属性的新手内功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (8, '大冰流碴子', 1, 1, 20, 200, 1, 5, 1, 10, '冰属性的10级内功武器', 0, NULL, NULL, 4000, 2);
+INSERT INTO `t_equipment` VALUES (9, '酒精瓶', 1, 2, 10, 100, 1, 5, 1, 0, '火属性的新手内功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (10, '汽油瓶', 1, 2, 20, 200, 1, 5, 1, 10, '火属性的10级内功武器', 0, NULL, NULL, 4000, 2);
+INSERT INTO `t_equipment` VALUES (11, '小皮鞭', 1, 3, 10, 100, 1, 5, 1, 0, '毒属性的新手内功武器', 0, NULL, NULL, 500, 1);
+INSERT INTO `t_equipment` VALUES (12, '大皮鞭', 1, 3, 20, 200, 1, 5, 1, 10, '毒属性的10级内功武器', 0, NULL, NULL, 4000, 2);
+INSERT INTO `t_equipment` VALUES (13, '王八壳', 2, 1, 100, 10, 5, 1, 0, 0, '冰属性的新手防御装备', 0, NULL, NULL, 600, 3);
+INSERT INTO `t_equipment` VALUES (14, '千年王八壳', 2, 1, 200, 20, 5, 1, 0, 10, '冰属性的10级防御装备', 0, NULL, NULL, 5000, 4);
+INSERT INTO `t_equipment` VALUES (15, '平底锅', 2, 2, 100, 10, 5, 1, 0, 0, '火属性的新手防御装备', 0, NULL, NULL, 600, 3);
+INSERT INTO `t_equipment` VALUES (16, '不锈钢平底锅', 2, 2, 200, 20, 5, 1, 0, 10, '火属性的10级防御装备', 0, NULL, NULL, 5000, 4);
+INSERT INTO `t_equipment` VALUES (17, '防毒口罩', 2, 3, 100, 10, 5, 1, 0, 0, '毒属性的新手防御装备', 0, NULL, NULL, 600, 3);
+INSERT INTO `t_equipment` VALUES (18, '防毒面具', 2, 3, 200, 20, 5, 1, 0, 10, '毒属性的10级防御装备', 0, NULL, NULL, 5000, 4);
+INSERT INTO `t_equipment` VALUES (19, '闪亮的冰刀', 1, 1, 30, 300, 1, 5, 2, 20, '冰属性的20级外功武器', 0, NULL, NULL, 8000, 5);
+INSERT INTO `t_equipment` VALUES (20, '漆黑的烧火棍', 1, 2, 30, 300, 1, 5, 2, 20, '火属性的20级外功武器', 0, NULL, NULL, 8000, 5);
+INSERT INTO `t_equipment` VALUES (21, '结实的药袋子', 1, 3, 30, 300, 1, 5, 2, 20, '毒属性的20级外功武器', 0, NULL, NULL, 8000, 5);
+INSERT INTO `t_equipment` VALUES (22, '锃亮的冰流碴子', 1, 1, 30, 300, 1, 5, 1, 20, '冰属性的20级内功武器', 0, NULL, NULL, 8000, 5);
+INSERT INTO `t_equipment` VALUES (23, '丰满的汽油瓶', 1, 2, 30, 300, 1, 5, 1, 20, '火属性的20级内功武器', 0, NULL, NULL, 8000, 5);
+INSERT INTO `t_equipment` VALUES (24, '鳄鱼皮鞭', 1, 3, 30, 300, 1, 5, 1, 20, '毒属性的20级内功武器', 0, NULL, NULL, 8000, 5);
+INSERT INTO `t_equipment` VALUES (25, '碧绿的王八壳', 2, 1, 300, 30, 5, 1, 0, 20, '冰属性的20级防御装备', 0, NULL, NULL, 10000, 6);
+INSERT INTO `t_equipment` VALUES (26, '铝合金平底锅', 2, 2, 300, 30, 5, 1, 0, 20, '火属性的20级防御装备', 0, NULL, NULL, 10000, 6);
+INSERT INTO `t_equipment` VALUES (27, '活性炭防毒面具', 2, 3, 300, 30, 5, 1, 0, 20, '毒属性的20级防御装备', 0, NULL, NULL, 10000, 6);
+INSERT INTO `t_equipment` VALUES (28, '闪耀的冰刀', 1, 1, 40, 400, 1, 5, 2, 30, '冰属性的30级外功武器', 0, NULL, NULL, 16000, 5);
+INSERT INTO `t_equipment` VALUES (29, '纯黑烧火棍', 1, 2, 40, 400, 1, 5, 2, 30, '火属性的30级外功武器', 0, NULL, NULL, 16000, 5);
+INSERT INTO `t_equipment` VALUES (30, '麻布药袋子', 1, 3, 40, 400, 1, 5, 2, 30, '毒属性的30级外功武器', 0, NULL, NULL, 16000, 5);
+INSERT INTO `t_equipment` VALUES (31, '耀眼的冰流碴子', 1, 1, 40, 400, 1, 5, 1, 30, '冰属性的30级内功武器', 0, NULL, NULL, 16000, 5);
+INSERT INTO `t_equipment` VALUES (32, '大型汽油瓶', 1, 2, 40, 400, 1, 5, 1, 30, '火属性的30级内功武器', 0, NULL, NULL, 16000, 5);
+INSERT INTO `t_equipment` VALUES (33, '大鳄鱼皮鞭', 1, 3, 40, 400, 1, 5, 1, 30, '毒属性的30级内功武器', 0, NULL, NULL, 16000, 5);
+INSERT INTO `t_equipment` VALUES (34, '深绿的王八壳', 2, 1, 400, 40, 5, 1, 0, 30, '冰属性的30级防御装备', 0, NULL, NULL, 200000, 6);
+INSERT INTO `t_equipment` VALUES (35, '钛合金平底锅', 2, 2, 400, 40, 5, 1, 0, 30, '火属性的30级防御装备', 0, NULL, NULL, 200000, 6);
+INSERT INTO `t_equipment` VALUES (36, '复合防毒面具', 2, 3, 400, 40, 5, 1, 0, 30, '毒属性的30级防御装备', 0, NULL, NULL, 200000, 6);
+INSERT INTO `t_equipment` VALUES (37, '亮瞎眼的冰刀', 1, 1, 50, 500, 1, 5, 2, 40, '冰属性的40级外功武器', 0, NULL, NULL, 24000, 5);
+INSERT INTO `t_equipment` VALUES (38, '玄铁烧火棍', 1, 2, 50, 500, 1, 5, 2, 40, '火属性的40级外功武器', 0, NULL, NULL, 24000, 5);
+INSERT INTO `t_equipment` VALUES (39, '精纺药袋子', 1, 3, 50, 500, 1, 5, 2, 40, '毒属性的40级外功武器', 0, NULL, NULL, 24000, 5);
+INSERT INTO `t_equipment` VALUES (40, '超低温冰流碴子', 1, 1, 50, 500, 1, 5, 1, 40, '冰属性的40级内功武器', 0, NULL, NULL, 24000, 5);
+INSERT INTO `t_equipment` VALUES (41, '巨型汽油瓶', 1, 2, 50, 500, 1, 5, 1, 40, '火属性的40级内功武器', 0, NULL, NULL, 24000, 5);
+INSERT INTO `t_equipment` VALUES (42, '人造革皮鞭', 1, 3, 50, 500, 1, 5, 1, 40, '毒属性的40级内功武器', 0, NULL, NULL, 24000, 5);
+INSERT INTO `t_equipment` VALUES (43, '墨绿的王八壳', 2, 1, 500, 50, 5, 1, 0, 40, '冰属性的40级防御装备', 0, NULL, NULL, 30000, 6);
+INSERT INTO `t_equipment` VALUES (44, '铂金平底锅', 2, 2, 500, 50, 5, 1, 0, 40, '火属性的40级防御装备', 0, NULL, NULL, 30000, 6);
+INSERT INTO `t_equipment` VALUES (45, '防毒头套', 2, 3, 500, 50, 5, 1, 0, 40, '毒属性的40级防御装备', 0, NULL, NULL, 30000, 6);
+INSERT INTO `t_equipment` VALUES (46, '镶钻的冰刀', 1, 1, 60, 600, 1, 5, 2, 50, '冰属性的50级外功武器', 0, NULL, NULL, 30000, 5);
+INSERT INTO `t_equipment` VALUES (47, '乌金烧火棍', 1, 2, 60, 600, 1, 5, 2, 50, '火属性的50级外功武器', 0, NULL, NULL, 30000, 5);
+INSERT INTO `t_equipment` VALUES (48, '纳米药袋子', 1, 3, 60, 600, 1, 5, 2, 50, '毒属性的50级外功武器', 0, NULL, NULL, 30000, 5);
+INSERT INTO `t_equipment` VALUES (49, '绝对零度冰流碴子', 1, 1, 60, 600, 1, 5, 1, 50, '冰属性的50级内功武器', 0, NULL, NULL, 30000, 5);
+INSERT INTO `t_equipment` VALUES (50, '超巨型汽油瓶', 1, 2, 60, 600, 1, 5, 1, 50, '火属性的50级内功武器', 0, NULL, NULL, 30000, 5);
+INSERT INTO `t_equipment` VALUES (51, '超长皮鞭', 1, 3, 60, 600, 1, 5, 1, 50, '毒属性的50级内功武器', 0, NULL, NULL, 30000, 5);
+INSERT INTO `t_equipment` VALUES (52, '黑色的王八壳', 2, 1, 600, 60, 5, 1, 0, 50, '冰属性的50级防御装备', 0, NULL, NULL, 40000, 6);
+INSERT INTO `t_equipment` VALUES (53, '金边平底锅', 2, 2, 600, 60, 5, 1, 0, 50, '火属性的50级防御装备', 0, NULL, NULL, 40000, 6);
+INSERT INTO `t_equipment` VALUES (54, '活性炭防毒头套', 2, 3, 600, 60, 5, 1, 0, 50, '毒属性的50级防御装备', 0, NULL, NULL, 40000, 6);
 
 -- ----------------------------
 -- Table structure for t_item
@@ -209,7 +236,7 @@ CREATE TABLE `t_player`  (
 -- ----------------------------
 -- Records of t_player
 -- ----------------------------
-INSERT INTO `t_player` VALUES (1, '无崖子', 1, 1, 9, 1100, 500, 500, 10000, 0, 1, 6, 13, 5, 5, 0, 0, 1);
+INSERT INTO `t_player` VALUES (1, '苏星河', 1, 1, 9, 1100, 500, 500, 10000, 0, 1, 6, 13, 5, 5, 0, 0, 1);
 INSERT INTO `t_player` VALUES (2, '丁春秋', 1, 2, 30, 3200, 2400, 2800, 10, 1, 1, 8, 4, 16, 23, 0, 0, 2);
 INSERT INTO `t_player` VALUES (3, '天山童姥', 0, 3, 30, 9999, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
 INSERT INTO `t_player` VALUES (4, '乔峰', 1, 4, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
@@ -276,7 +303,7 @@ INSERT INTO `t_stage` VALUES (1, '燕子坞', 0, NULL, 10);
 INSERT INTO `t_stage` VALUES (2, '缥缈峰', 10, NULL, 10);
 INSERT INTO `t_stage` VALUES (3, '四绝庄', 20, NULL, 10);
 INSERT INTO `t_stage` VALUES (4, '少室山', 30, NULL, 10);
-INSERT INTO `t_stage` VALUES (5, '中关村', 40, NULL, NULL);
-INSERT INTO `t_stage` VALUES (6, '紫光阁', 50, NULL, NULL);
+INSERT INTO `t_stage` VALUES (5, '搜狐大厦', 40, NULL, NULL);
+INSERT INTO `t_stage` VALUES (6, '畅游大楼', 50, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
