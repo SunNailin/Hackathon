@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 11/04/2019 21:16:18
+ Date: 12/04/2019 12:00:49
 */
 
 SET NAMES utf8mb4;
@@ -209,7 +209,7 @@ CREATE TABLE `t_player`  (
 -- ----------------------------
 -- Records of t_player
 -- ----------------------------
-INSERT INTO `t_player` VALUES (1, '无崖子', 1, 1, 9, 1100, 500, 500, 10000, 0, 1, 6, 13, 5, 5, 0, 0, 1);
+INSERT INTO `t_player` VALUES (1, '苏星河', 1, 1, 9, 1100, 500, 500, 10000, 0, 1, 6, 13, 5, 5, 0, 0, 1);
 INSERT INTO `t_player` VALUES (2, '丁春秋', 1, 2, 30, 3200, 2400, 2800, 10, 1, 1, 8, 4, 16, 23, 0, 0, 2);
 INSERT INTO `t_player` VALUES (3, '天山童姥', 0, 3, 30, 9999, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
 INSERT INTO `t_player` VALUES (4, '乔峰', 1, 4, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 0, 0);
@@ -276,7 +276,7 @@ INSERT INTO `t_stage` VALUES (1, '燕子坞', 0, NULL, 10);
 INSERT INTO `t_stage` VALUES (2, '缥缈峰', 10, NULL, 10);
 INSERT INTO `t_stage` VALUES (3, '四绝庄', 20, NULL, 10);
 INSERT INTO `t_stage` VALUES (4, '少室山', 30, NULL, 10);
-INSERT INTO `t_stage` VALUES (5, '中关村', 40, NULL, NULL);
-INSERT INTO `t_stage` VALUES (6, '紫光阁', 50, NULL, NULL);
+INSERT INTO `t_stage` VALUES (5, '搜狐大厦', 40, NULL, NULL);
+INSERT INTO `t_stage` VALUES (6, '畅游大楼', 50, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
