@@ -57,7 +57,7 @@ class GuideSuggestion:
         res = u'少侠所处的武侠世界是小腰派，生锈派，舔山派，丐帮，烧林寺，地龙寺六大门派纷争的世界。';
         res0 = u'少侠现在等级为%s级，' % level
         res1 = ''
-        if  level > 30 :
+        if  level > 45 :
             res1 = u'实在是威震武林。'
         elif level < 10 :
             res1 = u'尚需历练才是。'

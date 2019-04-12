@@ -78,14 +78,15 @@ class MoneySuggestion:
 			if item:
 				num = item[1]
 				need = (level-1+itemlevel)*(level-itemlevel)/2 - num
-				if need > 0:
+				if need > 0 and need*iteminfo[1] <= money:
 					str = u'建议购买%d个%s将现有装备%s提升至人物等级,需要银两%d '%(need,item[0],name,need*iteminfo[1])
 					return str
 			else:
 				#sql = "SELECT name,cost FROM t_item WHERE id = %d" % (itemid)
 				#item = self.select_db_data(sql)
 				need = (level-1+itemlevel)*(level-itemlevel)/2
-				str = u'购买%d个%s将现有装备%s提升至人物等级,需要银两%d '%(need,iteminfo[0],name,need*iteminfo[1])
+				if need*iteminfo[1] <= money:
+					str = u'购买%d个%s将现有装备%s提升至人物等级,需要银两%d '%(need,iteminfo[0],name,need*iteminfo[1])
 		return str
 	
 	def get_drug_str(self,playerid,money):
