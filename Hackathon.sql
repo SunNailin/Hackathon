@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80015
 File Encoding         : 65001
 
-Date: 2019-04-12 16:59:56
+Date: 2019-04-13 09:38:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -51,8 +51,8 @@ CREATE TABLE `t_activities` (
 INSERT INTO `t_activities` VALUES ('1', '剑气碧烟横', '9:00');
 INSERT INTO `t_activities` VALUES ('2', '商略平生义', '10:00');
 INSERT INTO `t_activities` VALUES ('3', '挥洒缚豪英', '11:00');
-INSERT INTO `t_activities` VALUES ('4', '红颜弹指老', '12:00');
-INSERT INTO `t_activities` VALUES ('5', '教单于折箭', '13:00');
+INSERT INTO `t_activities` VALUES ('4', '红颜弹指老', '20:48');
+INSERT INTO `t_activities` VALUES ('5', '教单于折箭', '20:23');
 
 -- ----------------------------
 -- Table structure for `t_bag`
@@ -66,13 +66,14 @@ CREATE TABLE `t_bag` (
   `number` int(11) unsigned DEFAULT '1' COMMENT '物品数量',
   `belong` int(11) unsigned DEFAULT '1' COMMENT '角色id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of t_bag
 -- ----------------------------
 INSERT INTO `t_bag` VALUES ('1', '1', '青铜矿', '1', '40', '1');
 INSERT INTO `t_bag` VALUES ('2', '3', '粗棉布', '1', '18', '1');
+INSERT INTO `t_bag` VALUES ('3', '10', '改名卡', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for `t_equipment`
@@ -242,7 +243,7 @@ INSERT INTO `t_player` VALUES ('1', '苏星河', '1', '1', '9', '1100', '500', '
 INSERT INTO `t_player` VALUES ('2', '丁春秋', '1', '2', '30', '3200', '2400', '2800', '10', '1', '3', '8', '4', '16', '23', '0', '0', '2');
 INSERT INTO `t_player` VALUES ('3', '天山童姥', '0', '3', '30', '9999', '4324', '3233', '20000', '1', '5', '30', null, null, '1', '0', '0', '1');
 INSERT INTO `t_player` VALUES ('4', '乔峰', '1', '4', '45', '32132', '4324', '2442', '300', '0', '8', '42', '14', '35', '40', '0', '0', '1');
-INSERT INTO `t_player` VALUES ('5', '王语嫣', '0', '5', '11', '3213', '4343', '43423', '400000', '1', '10', null, null, null, '1', '0', '0', '0');
+INSERT INTO `t_player` VALUES ('5', '扫地僧', '1', '5', '11', '3213', '4343', '43423', '400000', '1', '10', null, null, null, '1', '0', '0', '0');
 INSERT INTO `t_player` VALUES ('6', '慕容复', '1', '6', '32', '2323', '2333', '4343', '233344', '1', '11', '25', '15', '30', '32', '0', '0', '2');
 INSERT INTO `t_player` VALUES ('7', '王大锤', '1', '4', '55', '123232', '32312', '32234', '60', '1', '4', '50', '15', '10', '53', '0', '0', '3');
 
