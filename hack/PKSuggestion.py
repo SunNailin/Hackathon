@@ -61,9 +61,9 @@ class PKSuggestion:
 		selfType = self.get_SectPropertyByIndex('type', selfSect)[0]
 		oppType = self.get_SectPropertyByIndex('type', oppSect)[0]
 		
-		if(selfLevel + 10 < oppLevel):
+		if(selfLevel + 15 < oppLevel):
 			return "对方等级高你太多了，别鸡蛋碰石头了"
-		elif(oppLevel + 10 < selfLevel):
+		elif(oppLevel + 20 < selfLevel):
 			return "你等级高对方很多，基本可以虐他，就不给你建议了哈"
 		else:
 			weaponName = self.get_EquipmentProperties('name', selfAttribute, '1', selfType, selfLevel)[0]
